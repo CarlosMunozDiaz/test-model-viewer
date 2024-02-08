@@ -6,11 +6,38 @@
     <title>Document</title>
 </head>
 <body>
+    <style>
+        body {
+            margin: 0;
+            width: 100%;
+            height: 100vh;
+        }
+        p {
+            margin: 0;
+        }
+        .apertura {
+            width: 100%;
+            height: 5vh;
+            background-color: antiquewhite;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .model-viewer {
+            width: 100%;
+            height: 95vh;
+        }
+    </style>
     <!-- Import the component -->
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+    <div class="apertura">
+        <p>Esto es una prueba con un .glb dentro de un model viewer</p>
+    </div>
     <!-- Use it like any other HTML element -->
     <model-viewer 
         id="model-viewer" 
+        class="model-viewer"
         src="./media/duck.glb" 
         ar ar-modes="scene-viewer webxr" 
         camera-controls 
@@ -20,33 +47,33 @@
         max-camera-orbit="auto 90deg auto">
         <div id="error" class="hide">AR is not supported on this device</div>
     </model-viewer>
-      <script>
-        document.querySelector("#model-viewer").addEventListener('ar-status', (event) => {
-          if(event.detail.status === 'failed'){
-            const error = document.querySelector("#error");
-            error.classList.remove('hide');
-            error.addEventListener('transitionend',(event) => {
-              error.classList.add('hide');
-            });
-          }
+    <script>
+    document.querySelector("#model-viewer").addEventListener('ar-status', (event) => {
+        if(event.detail.status === 'failed'){
+        const error = document.querySelector("#error");
+        error.classList.remove('hide');
+        error.addEventListener('transitionend',(event) => {
+            error.classList.add('hide');
         });
-      </script>
-      <style>
-        #error {
-          background-color: #ffffffdd;
-          border-radius: 16px;
-          padding: 16px;
-          position: absolute;
-          left: 50%;
-          top: 50%;
-          transform: translate3d(-50%, -50%, 0);
-          transition: opacity 0.3s;
         }
-        #error.hide {
-          opacity: 0;
-          visibility: hidden;
-          transition: visibility 2s, opacity 1s 1s;
-        }
-      </style>
+    });
+    </script>
+    <style>
+    #error {
+        background-color: #ffffffdd;
+        border-radius: 16px;
+        padding: 16px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate3d(-50%, -50%, 0);
+        transition: opacity 0.3s;
+    }
+    #error.hide {
+        opacity: 0;
+        visibility: hidden;
+        transition: visibility 2s, opacity 1s 1s;
+    }
+    </style>
 </body>
 </html>
